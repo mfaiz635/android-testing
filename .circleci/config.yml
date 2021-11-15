@@ -2,7 +2,7 @@ version: 2
 config_android:
   docker:
   - image: circleci/android:api-28
-  # working_directory: ~/project
+  working_directory: ~/project
   environment:
     JAVA_TOOL_OPTIONS: "-Xmx1024m -XX:+UseContainerSupport"
     GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2 -Djava.util.concurrent.ForkJoinPool.common.parallelism=2 -Dkotlin.incremental=false"
@@ -18,7 +18,7 @@ jobs:
   build_and_setup:
     docker:
     - image: circleci/android:api-28
-    # working_directory: ~/project
+    working_directory: ~/project
     environment:
     - JAVA_TOOL_OPTIONS: "-Xmx1024m -XX:+UseContainerSupport"
     - GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2 -Djava.util.concurrent.ForkJoinPool.common.parallelism=2 -Dkotlin.incremental=false"
@@ -28,7 +28,8 @@ jobs:
     - run:
         name: Build test and lint
         command: |
-          ./gradlew assembleMockDebug assembleProdDebug assembleMockDebugAndroidTest testMockDebug testProdDebug lintMockDebug lintProdDebug
+          cd ..
+          gradlew assembleMockDebug assembleProdDebug assembleMockDebugAndroidTest testMockDebug testProdDebug lintMockDebug lintProdDebug
     - run:
         name: Save test results
         command: |
@@ -50,7 +51,7 @@ jobs:
   run_ftl:
     docker:
     - image: circleci/android:api-28
-    # working_directory: ~/project
+    working_directory: ~/project
     environment:
     - JAVA_TOOL_OPTIONS: -Xmx1024m
     - GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2 -Dkotlin.incremental=false
