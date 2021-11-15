@@ -28,6 +28,8 @@ jobs:
     - run:
         name: Build test and lint
         command: |
+          flutter clean
+          flutter run
           ./gradlew assembleMockDebug assembleProdDebug assembleMockDebugAndroidTest testMockDebug testProdDebug lintMockDebug lintProdDebug
     - run:
         name: Save test results
