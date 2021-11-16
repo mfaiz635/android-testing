@@ -25,10 +25,10 @@ jobs:
     - TERM: dumb
     steps:
     - checkout
-    # - run:
-    #    name: Build test and lint
-    #    command: |
-    #      ./gradlew assembleMockDebug assembleProdDebug assembleMockDebugAndroidTest testMockDebug testProdDebug lintMockDebug lintProdDebug
+    - run:
+        name: Build test and lint
+        command: |
+          ./gradlew assembleMockDebug assembleProdDebug assembleMockDebugAndroidTest testMockDebug testProdDebug lintMockDebug lintProdDebug
     - run:
         name: Save test results
         command: |
